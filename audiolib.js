@@ -1,10 +1,6 @@
-audioContext = new webkitAudioContext;
-
-function AudioObj(fileDirectory) {
+function audioFileLoader(fileDirectory) {
     var soundObj = {};
     soundObj.fileDirectory = fileDirectory;
-
-
 
     var getSound = new XMLHttpRequest();
     getSound.open("GET", soundObj.fileDirectory, true);
@@ -19,16 +15,18 @@ function AudioObj(fileDirectory) {
     getSound.send();
 
 
-    soundObj.play = function(volumeVal) {
-        var volume = audioContext.createGainNode();
-        volume.gain.value = volumeVal;
+    soundObj.play = function() {
         var playSound = audioContext.createBufferSource();
         playSound.buffer = soundObj.soundToPlay;
-        playSound.connect(volume);
-        volume.connect((audioContext.destination))
-        playSound.start(0)
+        playSound.connect(audioContext.destination)
+        playSound.start(audioContext.currentTime)
     }
 
     return soundObj;
 
-}
+};
+
+// Example 
+var snare = audioFileLoader("snare.mp3");
+
+window.addEventListener("click",snare.play,false)
