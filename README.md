@@ -21,7 +21,7 @@ Example:
 > })
 
 
-sound.kick.play()
+> sound.kick.play()
 
 
 
