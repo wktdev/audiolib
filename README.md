@@ -7,6 +7,7 @@ A simple abstraction to load audio files individually or as a "batch"
 Example:
 
 > var snare = audioFileLoader("snare.mp3");
+
 > snare.play();
 
 
