@@ -1,7 +1,9 @@
+var audioContext = new AudioContext();
+
 function audioFileLoader(fileDirectory) {
     var soundObj = {};
     soundObj.fileDirectory = fileDirectory;
-
+    var playSound = undefined;
     var getSound = new XMLHttpRequest();
     getSound.open("GET", soundObj.fileDirectory, true);
     getSound.responseType = "arraybuffer";
@@ -16,10 +18,15 @@ function audioFileLoader(fileDirectory) {
 
 
     soundObj.play = function() {
-        var playSound = audioContext.createBufferSource();
+        playSound = audioContext.createBufferSource();
         playSound.buffer = soundObj.soundToPlay;
         playSound.connect(audioContext.destination)
         playSound.start(audioContext.currentTime)
+    }
+
+    soundObj.stop = function() {
+
+        playSound.stop(audioContext.currentTime)
     }
 
     return soundObj;
@@ -36,13 +43,6 @@ function audioBatchLoader(obj) {
     return obj
 
 }
-
-//________________________________________________________ Example 
-
-// var snare = audioFileLoader("snare.mp3");
-// window.onclick = function(){sound.snare.play(audioContext.currentTime)}
-
-
 
 //_________________________________________________________Example
 // var sound = audioBatchLoader({
