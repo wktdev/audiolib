@@ -2,6 +2,8 @@
 
 #Web Audio API File Loader
 
+NOTE: This code has been updated to WKT-Audio here:  https://github.com/wktdev/WKT-Audio
+
 A simple abstraction to load audio files individually or as a "batch".
 
 Example:
